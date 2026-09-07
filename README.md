@@ -96,7 +96,7 @@ O jogo funciona diretamente no navegador utilizando apenas **HTML, CSS e JavaScr
 
 A versão publicada do jogo está disponível em:
 
-****
+**https://i-am-gab.github.io/memoria-das-artes/**
 
 ## 👨‍💻 Informações do projeto
 
