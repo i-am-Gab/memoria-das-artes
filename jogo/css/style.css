@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f2f4f8;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.game {
+    width: 100%;
+    max-width: 700px;
+
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    text-align: center;
+}
+
+.game-header h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.game-header p {
+    font-size: 16px;
+    color: #555555;
+    margin-bottom: 20px;
+}
+
+.game-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+
+    margin-bottom: 25px;
+
+    font-size: 18px;
+}
+
+.game-info strong {
+    font-weight: bold;
+}
+
+
+/* Tabuleiro */
+
+.memory-game {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 12px;
+
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+
+/* Cartas */
+
+.card {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: #3f51b5;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: none;
+}
+
+
+/* Carta virada */
+
+.card.flipped img,
+.card.matched img {
+    display: block;
+}
+
+.card.flipped,
+.card.matched {
+    background-color: #ffffff;
+}
+
+
+/* Carta encontrada */
+
+.card.matched {
+    cursor: default;
+}
+
+.card.matched:hover {
+    transform: none;
+}
+
+
+/* Mensagem */
+
+.game-message {
+    min-height: 30px;
+
+    margin-top: 20px;
+
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/* Botão */
+
+.restart-button {
+    margin-top: 15px;
+
+    padding: 10px 25px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #3f51b5;
+    color: #ffffff;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s;
+}
+
+.restart-button:hover {
+    background-color: #303f9f;
+}
+
+
+/* Responsividade */
+
+@media (max-width: 600px) {
+
+    .game {
+        padding: 20px;
+    }
+
+    .game-header h1 {
+        font-size: 26px;
+    }
+
+    .memory-game {
+        gap: 8px;
+    }
+
+    .game-info {
+        gap: 20px;
+        font-size: 16px;
+    }
+}
