@@ -7,7 +7,12 @@
 body {
     min-height: 100vh;
     font-family: Arial, sans-serif;
-    background-color: #f2f4f8;
+
+    background: linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
 
     display: flex;
     justify-content: center;
@@ -18,31 +23,99 @@ body {
 
 .game {
     width: 100%;
-    max-width: 700px;
+    max-width: 750px;
 
-    background-color: #ffffff;
-    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95);
+
+    padding: 35px;
+
     border-radius: 15px;
 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 
     text-align: center;
 }
 
+
+/* =========================
+   MENU
+   ========================= */
+
+.menu {
+    padding: 20px;
+}
+
+.menu h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.menu p {
+    font-size: 18px;
+    color: #555555;
+
+    margin-bottom: 30px;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.category-button {
+    padding: 15px 25px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #3f51b5;
+    color: #ffffff;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.category-button:hover {
+    background-color: #303f9f;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   ÁREA DO JOGO
+   ========================= */
+
+.game-board {
+    display: none;
+}
+
 .game-header h1 {
     font-size: 32px;
-    margin-bottom: 10px;
+
+    margin-bottom: 8px;
 }
 
 .game-header p {
-    font-size: 16px;
+    font-size: 17px;
+
     color: #555555;
+
     margin-bottom: 20px;
 }
 
 .game-info {
     display: flex;
+
     justify-content: center;
+
     gap: 40px;
 
     margin-bottom: 25px;
@@ -55,7 +128,9 @@ body {
 }
 
 
-/* Tabuleiro */
+/* =========================
+   TABULEIRO
+   ========================= */
 
 .memory-game {
     display: grid;
@@ -65,19 +140,24 @@ body {
     gap: 12px;
 
     max-width: 560px;
+
     margin: 0 auto;
 }
 
 
-/* Cartas */
+/* =========================
+   CARTAS
+   ========================= */
 
 .card {
     position: relative;
 
     width: 100%;
+
     aspect-ratio: 1 / 1;
 
     border: none;
+
     border-radius: 10px;
 
     background-color: #3f51b5;
@@ -127,7 +207,9 @@ body {
 }
 
 
-/* Mensagem */
+/* =========================
+   MENSAGEM
+   ========================= */
 
 .game-message {
     min-height: 30px;
@@ -135,21 +217,33 @@ body {
     margin-top: 20px;
 
     font-size: 18px;
+
     font-weight: bold;
 }
 
 
-/* Botão */
+/* =========================
+   BOTÕES
+   ========================= */
 
-.restart-button {
+.game-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
     margin-top: 15px;
+}
 
-    padding: 10px 25px;
+.restart-button,
+.menu-button {
+    padding: 10px 20px;
 
     border: none;
+
     border-radius: 8px;
 
-    background-color: #3f51b5;
     color: #ffffff;
 
     font-size: 16px;
@@ -159,17 +253,39 @@ body {
     transition: background-color 0.2s;
 }
 
+.restart-button {
+    background-color: #3f51b5;
+}
+
 .restart-button:hover {
     background-color: #303f9f;
 }
 
+.menu-button {
+    background-color: #777777;
+}
 
-/* Responsividade */
+.menu-button:hover {
+    background-color: #555555;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+   ========================= */
 
 @media (max-width: 600px) {
 
     .game {
         padding: 20px;
+    }
+
+    .menu {
+        padding: 10px;
+    }
+
+    .menu h1 {
+        font-size: 28px;
     }
 
     .game-header h1 {
@@ -182,6 +298,16 @@ body {
 
     .game-info {
         gap: 20px;
+
         font-size: 16px;
+    }
+
+    .game-buttons {
+        flex-direction: column;
+    }
+
+    .restart-button,
+    .menu-button {
+        width: 100%;
     }
 }

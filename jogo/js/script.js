@@ -1,8 +1,19 @@
-const game = document.getElementById("memoryGame");
+const menu = document.getElementById("menu");
+const gameBoard = document.getElementById("gameBoard");
+const memoryGame = document.getElementById("memoryGame");
+
+const categoryName = document.getElementById("categoryName");
+
 const attemptsElement = document.getElementById("attempts");
 const pairsElement = document.getElementById("pairs");
+
 const messageElement = document.getElementById("gameMessage");
+
 const restartButton = document.getElementById("restartButton");
+const menuButton = document.getElementById("menuButton");
+
+const categoryButtons = document.querySelectorAll(".category-button");
+
 
 let firstCard = null;
 let secondCard = null;
@@ -12,10 +23,35 @@ let lockBoard = false;
 let attempts = 0;
 let pairs = 0;
 
+let currentCategory = "";
 
-/* Inicia o jogo */
+
+/* =========================
+   ESCOLHER CATEGORIA
+   ========================= */
+
+categoryButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        currentCategory = button.dataset.category;
+
+        startGame();
+
+    });
+
+});
+
+
+/* =========================
+   INICIAR O JOGO
+   ========================= */
 
 function startGame() {
+
+    menu.style.display = "none";
+    gameBoard.style.display = "block";
+
     firstCard = null;
     secondCard = null;
 
@@ -29,27 +65,88 @@ function startGame() {
 
     messageElement.textContent = "";
 
-    shuffleCards();
+    showCategoryName();
+
+    createCards();
+
 }
 
 
-/* Embaralha as cartas */
+/* =========================
+   MOSTRAR NOME DA CATEGORIA
+   ========================= */
 
-function shuffleCards() {
-    const cards = Array.from(document.querySelectorAll(".card"));
+function showCategoryName() {
+
+    const names = {
+        cidades: "Cidades",
+        plantas: "Plantas",
+        pessoas: "Pessoas"
+    };
+
+    categoryName.textContent = "Categoria: " + names[currentCategory];
+
+}
+
+
+/* =========================
+   CRIAR AS CARTAS
+   ========================= */
+
+function createCards() {
+
+    memoryGame.innerHTML = "";
+
+    const cards = [];
+
+    for (let i = 1; i <= 8; i++) {
+
+        cards.push(i);
+        cards.push(i);
+
+    }
+
+    shuffleCards(cards);
+
+    cards.forEach(cardNumber => {
+
+        const card = document.createElement("button");
+
+        card.classList.add("card");
+
+        card.dataset.card = cardNumber;
+
+        const image = document.createElement("img");
+
+        image.src = `assets/img/${currentCategory}/${cardNumber}.jpg`;
+
+        image.alt = `Obra de arte ${cardNumber}`;
+
+        card.appendChild(image);
+
+        card.addEventListener("click", flipCard);
+
+        memoryGame.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================
+   EMBARALHAR AS CARTAS
+   ========================= */
+
+function shuffleCards(cards) {
 
     cards.sort(() => Math.random() - 0.5);
 
-    cards.forEach(card => {
-        game.appendChild(card);
-
-        card.classList.remove("flipped");
-        card.classList.remove("matched");
-    });
 }
 
 
-/* Quando uma carta é clicada */
+/* =========================
+   VIRAR CARTA
+   ========================= */
 
 function flipCard() {
 
@@ -68,8 +165,11 @@ function flipCard() {
     this.classList.add("flipped");
 
     if (firstCard === null) {
+
         firstCard = this;
+
         return;
+
     }
 
     secondCard = this;
@@ -79,10 +179,13 @@ function flipCard() {
     attemptsElement.textContent = attempts;
 
     checkMatch();
+
 }
 
 
-/* Verifica se as cartas formam um par */
+/* =========================
+   VERIFICAR O PAR
+   ========================= */
 
 function checkMatch() {
 
@@ -90,14 +193,21 @@ function checkMatch() {
     const secondCardValue = secondCard.dataset.card;
 
     if (firstCardValue === secondCardValue) {
+
         markAsMatched();
+
     } else {
+
         unflipCards();
+
     }
+
 }
 
 
-/* Marca as cartas como encontradas */
+/* =========================
+   MARCAR PAR ENCONTRADO
+   ========================= */
 
 function markAsMatched() {
 
@@ -111,53 +221,77 @@ function markAsMatched() {
     resetBoard();
 
     if (pairs === 8) {
-        messageElement.textContent = "Parabéns! Você encontrou todos os pares!";
+
+        messageElement.textContent =
+            "Parabéns! Você encontrou todos os pares!";
+
     }
+
 }
 
 
-/* Esconde as cartas que não combinam */
+/* =========================
+   ESCONDER CARTAS ERRADAS
+   ========================= */
 
 function unflipCards() {
 
+    // Bloqueia novos cliques enquanto as cartas estão sendo escondidas.
     lockBoard = true;
 
     setTimeout(() => {
 
+        // Remove a classe "flipped" para esconder as imagens das cartas.
         firstCard.classList.remove("flipped");
         secondCard.classList.remove("flipped");
 
+        // Depois de esconder as cartas, reseta o estado da jogada.
         resetBoard();
 
     }, 1000);
+
 }
 
 
-/* Prepara o jogo para a próxima tentativa */
+/* =========================
+   RESETAR ESTADO DA JOGADA
+   ========================= */
 
 function resetBoard() {
 
+    // Limpa as cartas selecionadas para permitir uma nova jogada.
     firstCard = null;
     secondCard = null;
 
+    // Libera o tabuleiro para que o jogador possa clicar novamente.
     lockBoard = false;
+
 }
 
 
-/* Adiciona o evento de clique às cartas */
+/* =========================
+   NOVO JOGO
+   ========================= */
 
-const cards = document.querySelectorAll(".card");
+restartButton.addEventListener("click", () => {
 
-cards.forEach(card => {
-    card.addEventListener("click", flipCard);
+    startGame();
+
 });
 
 
-/* Reinicia o jogo */
+/* =========================
+   VOLTAR AO MENU
+   ========================= */ 
 
-restartButton.addEventListener("click", startGame);
+menuButton.addEventListener("click", () => {
 
+    gameBoard.style.display = "none";
 
-/* Começa o jogo */
+    menu.style.display = "block";
 
-startGame();
+    memoryGame.innerHTML = "";
+
+    messageElement.textContent = "";
+
+});
