@@ -20,8 +20,8 @@ O jogo foi desenvolvido como uma atividade acadêmica para aplicar conceitos de 
 6. Se as duas cartas forem iguais, elas permanecerão visíveis.
 7. Se forem diferentes, as cartas serão escondidas novamente após alguns segundos.
 8. Continue jogando até encontrar todos os **8 pares**.
-9. Ao finalizar o jogo, uma mensagem de parabéns e uma animação de confetes serão exibidas.
-10. Depois de encontrar um par, é possível clicar novamente em uma das cartas para visualizar a pintura em tamanho maior.
+
+**Depois de encontrar um par, é possível clicar novamente em uma das cartas para visualizar a pintura em tamanho maior.**
 
 ## 📜 Regras do jogo
 
