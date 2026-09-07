@@ -14,6 +14,9 @@ const menuButton = document.getElementById("menuButton");
 
 const categoryButtons = document.querySelectorAll(".category-button");
 
+const imageModal = document.getElementById("imageModal");
+const largeImage = document.getElementById("largeImage");
+const closeModal = document.getElementById("closeModal");
 
 let firstCard = null;
 let secondCard = null;
@@ -150,34 +153,53 @@ function shuffleCards(cards) {
 
 function flipCard() {
 
+    // Se o tabuleiro estiver bloqueado, não permite clicar.
     if (lockBoard) {
         return;
     }
 
+
+    // Se a carta já foi encontrada,
+    // abre a pintura em tamanho maior.
+    if (this.classList.contains("matched")) {
+
+        openImage(this);
+
+        return;
+    }
+
+
+    // Impede clicar duas vezes na mesma carta.
     if (this === firstCard) {
         return;
     }
 
-    if (this.classList.contains("matched")) {
-        return;
-    }
 
+    // Mostra a imagem da carta.
     this.classList.add("flipped");
 
+
+    // Se for a primeira carta selecionada,
+    // guarda a carta e espera a segunda.
     if (firstCard === null) {
 
         firstCard = this;
 
         return;
-
     }
 
+
+    // Guarda a segunda carta selecionada.
     secondCard = this;
 
+
+    // Aumenta o número de tentativas.
     attempts++;
 
     attemptsElement.textContent = attempts;
 
+
+    // Verifica se as duas cartas formam um par.
     checkMatch();
 
 }
@@ -224,6 +246,8 @@ function markAsMatched() {
 
         messageElement.textContent =
             "Parabéns! Você encontrou todos os pares!";
+
+        createConfetti();
 
     }
 
@@ -295,3 +319,111 @@ menuButton.addEventListener("click", () => {
     messageElement.textContent = "";
 
 });
+
+
+/* =========================
+   ABRIR PINTURA AMPLIADA
+   ========================= */
+
+function openImage(card) {
+
+    // Pega a imagem que está dentro da carta.
+    const image = card.querySelector("img");
+
+
+    // Coloca o endereço da imagem na janela.
+    largeImage.src = image.src;
+
+
+    // Usa o texto alternativo da carta.
+    largeImage.alt = image.alt;
+
+
+    // Mostra a janela.
+    imageModal.classList.add("show");
+
+}
+
+/* =========================
+   FECHAR PINTURA AMPLIADA
+   ========================= */
+
+closeModal.addEventListener("click", () => {
+
+    imageModal.classList.remove("show");
+
+});
+
+/* =========================
+   CLIQUE FORA PARA FECHAR
+   ========================= */
+
+imageModal.addEventListener("click", (event) => {
+
+    if (event.target === imageModal) {
+
+        imageModal.classList.remove("show");
+
+    }
+
+});
+
+/* =========================
+   CRIAR CONFETES
+   ========================= */
+
+function createConfetti() {
+
+    // Cria 100 pedaços de confete.
+    for (let i = 0; i < 100; i++) {
+
+        const confetti = document.createElement("div");
+
+        confetti.classList.add("confetti");
+
+
+        // Escolhe uma posição horizontal aleatória.
+        confetti.style.left =
+            Math.random() * 100 + "%";
+
+
+        // Escolhe uma cor aleatória.
+        const colors = [
+            "#f44336",
+            "#2196f3",
+            "#4caf50",
+            "#ffeb3b",
+            "#ff9800",
+            "#9c27b0"
+        ];
+
+        confetti.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+
+
+        // Escolhe um tamanho aleatório.
+        const size = Math.random() * 8 + 6;
+
+        confetti.style.width = size + "px";
+        confetti.style.height = size + "px";
+
+
+        // Faz cada confete cair em uma velocidade diferente.
+        confetti.style.animationDuration =
+            Math.random() * 2 + 2 + "s";
+
+
+        // Adiciona o confete à página.
+        document.body.appendChild(confetti);
+
+
+        // Remove o confete depois da animação.
+        setTimeout(() => {
+
+            confetti.remove();
+
+        }, 4000);
+
+    }
+
+}
