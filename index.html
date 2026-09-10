@@ -14,7 +14,9 @@
 
     <main class="game">
 
-        <!-- Menu inicial -->
+        <!-- =========================
+             MENU INICIAL
+             ========================= -->
 
         <section class="menu" id="menu">
 
@@ -26,15 +28,21 @@
 
             <div class="categories">
 
-                <button class="category-button" data-category="cidades">
+                <button
+                    class="category-button"
+                    data-category="cidades">
                     Cidades
                 </button>
 
-                <button class="category-button" data-category="plantas">
+                <button
+                    class="category-button"
+                    data-category="plantas">
                     Plantas
                 </button>
 
-                <button class="category-button" data-category="pessoas">
+                <button
+                    class="category-button"
+                    data-category="pessoas">
                     Pessoas
                 </button>
 
@@ -43,15 +51,68 @@
         </section>
 
 
-        <!-- Jogo -->
+        <!-- =========================
+             ESCOLHA DA DIFICULDADE
+             ========================= -->
 
-        <section class="game-board" id="gameBoard">
+        <section
+            class="difficulty-menu"
+            id="difficultyMenu">
+
+            <h1>Escolha a dificuldade</h1>
+
+            <p id="selectedCategory">
+            </p>
+
+            <div class="difficulties">
+
+                <button
+                    class="difficulty-button easy"
+                    data-pairs="4">
+                    Fácil
+                    <span>4 pares</span>
+                </button>
+
+                <button
+                    class="difficulty-button medium"
+                    data-pairs="8">
+                    Médio
+                    <span>8 pares</span>
+                </button>
+
+                <button
+                    class="difficulty-button hard"
+                    data-pairs="12">
+                    Difícil
+                    <span>12 pares</span>
+                </button>
+
+            </div>
+
+            <button
+                class="back-button"
+                id="backToCategoryButton">
+                Voltar
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             ÁREA DO JOGO
+             ========================= -->
+
+        <section
+            class="game-board"
+            id="gameBoard">
 
             <header class="game-header">
 
                 <h1>Memória das Artes</h1>
 
                 <p id="categoryName"></p>
+
+                <p id="difficultyName"></p>
 
                 <div class="game-info">
 
@@ -62,7 +123,7 @@
 
                     <span>
                         Pares:
-                        <strong id="pairs">0</strong>/8
+                        <strong id="pairs">0</strong>/<span id="totalPairs">4</span>
                     </span>
 
                 </div>
@@ -70,7 +131,7 @@
             </header>
 
 
-            <!-- Cartas serão criadas pelo JavaScript -->
+            <!-- TABULEIRO -->
 
             <section
                 class="memory-game"
@@ -78,11 +139,15 @@
             </section>
 
 
+            <!-- MENSAGEM -->
+
             <div
                 class="game-message"
                 id="gameMessage">
             </div>
 
+
+            <!-- BOTÕES -->
 
             <div class="game-buttons">
 
@@ -104,22 +169,28 @@
 
     </main>
 
-    <!-- Janela para visualizar a pintura ampliada -->
 
-    <div class="image-modal" id="imageModal">
+    <!-- =========================
+         MODAL DA PINTURA
+         ========================= -->
+
+    <div
+        class="image-modal"
+        id="imageModal">
 
         <div class="image-modal-content">
 
             <button
                 class="close-modal"
-                id="closeModal">
-                ×
+                id="closeModal"
+                aria-label="Fechar imagem">
+                &times;
             </button>
 
             <img
                 id="largeImage"
                 src=""
-                alt="Pintura ampliada">
+                alt="">
 
         </div>
 
