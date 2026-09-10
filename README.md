@@ -14,7 +14,10 @@ O jogo foi desenvolvido como uma atividade acadêmica para aplicar conceitos de 
    * **Cidades**
    * **Plantas**
    * **Pessoas**
-3. O tabuleiro será preenchido com **16 cartas**, formando **8 pares**.
+3. O tabuleiro será preenchido de acordo com a dificuldade escolhida:
+   * **Fácil (4 pares)**
+   * **Médio (8 pares)**
+   * **Díficil (12 pares)**
 4. Clique em uma carta para revelar a pintura.
 5. Clique em uma segunda carta para tentar encontrar o par correspondente.
 6. Se as duas cartas forem iguais, elas permanecerão visíveis.

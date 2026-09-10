@@ -248,32 +248,32 @@ function createCards() {
 
     const cards = [];
 
+    // Cria uma lista com as 12 imagens disponíveis
+    const availableImages = [];
 
-    /*
-     * Cria os pares de acordo
-     * com a dificuldade escolhida.
-     *
-     * Fácil  = 4 pares
-     * Médio  = 6 pares
-     * Difícil = 12 pares
-     */
-
-    for (let i = 1; i <= totalPairs; i++) {
-
-        cards.push(i);
-
-        cards.push(i);
-
+    for (let i = 1; i <= 12; i++) {
+        availableImages.push(i);
     }
 
+    // Embaralha as imagens
+    shuffleCards(availableImages);
 
-    // Embaralha as cartas.
+    // Escolhe somente a quantidade necessária
+    const selectedImages =
+        availableImages.slice(0, totalPairs);
 
+    // Cria os pares
+    selectedImages.forEach(imageNumber => {
+
+        cards.push(imageNumber);
+        cards.push(imageNumber);
+
+    });
+
+    // Embaralha as cartas
     shuffleCards(cards);
 
-
-    // Cria cada carta na página.
-
+    // Cria as cartas na tela
     cards.forEach(cardNumber => {
 
         const card =
@@ -284,7 +284,6 @@ function createCards() {
         card.dataset.card =
             cardNumber;
 
-
         const image =
             document.createElement("img");
 
@@ -294,20 +293,16 @@ function createCards() {
         image.alt =
             `Obra de arte ${cardNumber}`;
 
-
         card.appendChild(image);
-
 
         card.addEventListener(
             "click",
             flipCard
         );
 
-
         memoryGame.appendChild(card);
 
     });
-
 }
 
 
